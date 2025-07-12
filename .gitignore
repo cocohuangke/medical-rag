@@ -1,0 +1,23 @@
+# 真实配置（含 API key，勿提交）
+config.yaml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# 备份
+*.bak
+*.bak-*/
+
+# 评测结果（运行时生成）
+docs/evaluation-results.json
+docs/rebuild-chromadb.log
+
+# 临时脚本
+speed_test.py
+verify_chromadb.py
+
+# 大文件（本地生成的向量库）
+medical_db/
+*.bak-*
