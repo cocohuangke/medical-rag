@@ -1,0 +1,60 @@
+# ============================================================
+# Medical RAG 系统配置模板
+# 用法：复制为 config.yaml，填入真实 api_key 后使用
+# 注意：config.yaml 不要提交到 git（已加入 .gitignore）
+# ============================================================
+
+# LLM 配置
+llm:
+  # provider 可选：
+  #   ollama             - 本地 Ollama 服务（需另装 Ollama + pull 模型）
+  #   openai_compatible  - 任何 OpenAI 兼容 API（DeepSeek/通义/Kimi/OpenAI 等）
+  provider: openai_compatible
+
+  # --- provider=ollama 时使用 ---
+  ollama:
+    model: qwen2.5:7b
+    base_url: http://localhost:11434
+    temperature: 0.3
+    num_ctx: 4096
+
+  # --- provider=openai_compatible 时使用 ---
+  openai_compatible:
+    # model 名按各厂商文档填：
+    #   DeepSeek:  deepseek-chat (V3) / deepseek-reasoner (R1)
+    #   通义千问:   qwen-plus / qwen-max / qwen-turbo
+    #   Kimi:      moonshot-v1-8k / moonshot-v1-32k
+    #   OpenAI:    gpt-4o-mini / gpt-4o
+    model: deepseek-chat
+    api_key: ""                       # ← 在 config.yaml 里填真实 key
+    base_url: https://api.deepseek.com
+    temperature: 0.3
+    max_tokens: 2048
+
+# 嵌入模型（本地，不变）
+embedding:
+  model: BAAI/bge-large-zh-v1.5
+  device: auto                        # auto | cuda | cpu
+
+# 数据
+data:
+  path: docs/medical - 全部.json
+  persist_dir: medical_db
+
+# 文本分割
+split:
+  chunk_size: 400
+  chunk_overlap: 80
+
+# 检索
+retrieval:
+  dense_k: 6
+  sparse_k: 6
+  fused_k: 4
+  rrf_k: 60
+
+# 评测阈值
+eval:
+  similarity_threshold: 0.6
+  faith_threshold: 0.5
+  completeness_threshold: 0.4
