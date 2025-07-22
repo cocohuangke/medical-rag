@@ -1,0 +1,9 @@
+\\DS1019\home\Drive\project\xjtlu-assignment\科研项目\medical-rag\medical_rag_system.py:35: DeprecationWarning: `langchain-community` is being sunset and is no longer actively maintained. See https://github.com/langchain-ai/langchain-community/issues/674 for details and migration guidance toward standalone integration packages.
+  from langchain_community.vectorstores import Chroma
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 6301.43it/s]
+\\DS1019\home\Drive\project\xjtlu-assignment\科研项目\medical-rag\medical_rag_system.py:152: LangChainDeprecationWarning: The class `Chroma` was deprecated in LangChain 0.2.9 and will be removed in 1.0. An updated version of the class exists in the `langchain-chroma package and should be used instead. To use it run `pip install -U `langchain-chroma` and import as `from `langchain_chroma import Chroma``.
+  return Chroma(persist_directory=persist_dir, embedding_function=embed_model)
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Users\thegu\AppData\Local\Temp\jieba.cache
+Loading model cost 0.811 seconds.
+Prefix dict has been built successfully.
