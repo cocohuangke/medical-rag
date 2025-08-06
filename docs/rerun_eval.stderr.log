@@ -1,0 +1,18 @@
+Loading weights:   0%|          | 0/391 [00:00<?, ?it/s]Loading weights: 100%|██████████| 391/391 [00:00<00:00, 7158.08it/s]
+\\DS1019\home\Drive\project\xjtlu-assignment\科研项目\medical-rag\medical_rag_system.py:152: LangChainDeprecationWarning: The class `Chroma` was deprecated in LangChain 0.2.9 and will be removed in 1.0. An updated version of the class exists in the `langchain-chroma package and should be used instead. To use it run `pip install -U `langchain-chroma` and import as `from `langchain_chroma import Chroma``.
+  return Chroma(persist_directory=persist_dir, embedding_function=embed_model)
+Building prefix dict from the default dictionary ...
+Loading model from cache C:\Users\thegu\AppData\Local\Temp\jieba.cache
+Loading model cost 1.109 seconds.
+Prefix dict has been built successfully.
+Traceback (most recent call last):
+  File "\\DS1019\home\Drive\project\xjtlu-assignment\科研项目\medical-rag\docs\rerun_eval.py", line 25, in <module>
+    print(f"向量库文档数: {mrs.vectorstore._collection.count()}")
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thegu\.conda\envs\learn-ds\Lib\site-packages\chromadb\api\models\Collection.py", line 55, in count
+    return self._client._count(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\thegu\.conda\envs\learn-ds\Lib\site-packages\chromadb\api\rust.py", line 397, in _count
+    return self.bindings.count(str(collection_id), tenant, database)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+chromadb.errors.InternalError: Error executing plan: Error sending backfill request to compactor: Error constructing hnsw segment reader: Error creating hnsw segment reader: Error loading hnsw index
