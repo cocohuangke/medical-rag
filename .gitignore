@@ -14,10 +14,6 @@ __pycache__/
 results/evaluation-results.json
 logs/rebuild-chromadb.log
 
-# 临时脚本
-speed_test.py
-verify_chromadb.py
-
-# 大文件（本地生成的向量库）
+# 大文件（语料库可能生成的额外）
 medical_db/
 *.bak-*
