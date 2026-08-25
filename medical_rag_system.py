@@ -625,7 +625,7 @@ def load_test_questions(path=None):
     返回 [(question, expected), ...] 元组列表，供 evaluate_rag_system 使用。
     """
     if path is None:
-        path = os.path.join(os.path.dirname(__file__), "docs", "test_questions.json")
+        path = os.path.join(os.path.dirname(__file__), "data", "test_questions.json")
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
     if data and isinstance(data[0], dict):
@@ -660,7 +660,7 @@ if __name__ == "__main__":
     print(f"平均延迟:                     {evaluation['avg_latency']}秒")
 
     # 保存详细结果
-    report_path = os.path.join(os.path.dirname(__file__), "docs", "evaluation-results.json")
+    report_path = os.path.join(os.path.dirname(__file__), "results", "evaluation-results.json")
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(evaluation, f, ensure_ascii=False, indent=2)
     print(f"\n详细结果已保存到: {report_path}")

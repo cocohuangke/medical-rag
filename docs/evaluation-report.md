@@ -10,7 +10,7 @@
 
 A fixed test set of **50 cases** is used across all phases. All questions target respiratory-disease symptoms and are drawn from 20 unique diseases, each with 2–3 phrasings (e.g. *"What are the symptoms of X?"*, *"What are the typical manifestations of X?"*, *"What are the clinical presentations of X?"*). The expected answers are the `symptom` field of the corresponding record, cleaned of scraping artifacts (spurious human-name tokens such as 毓卓 / 闫鹏辉 / 闫铁).
 
-The test set is stored as an external file — `docs/test_questions.json` — and loaded by `load_test_questions()`, rather than being hardcoded in the source.
+The test set is stored as an external file — `data/test_questions.json` — and loaded by `load_test_questions()`, rather than being hardcoded in the source.
 
 The fixed test set enables **apple-to-apple comparison** between phases — any metric delta is attributable to pipeline changes, not test-set variance.
 
@@ -37,7 +37,7 @@ For each test case:
 4. Flag hallucination when faithfulness < 0.5, or when the answer asserts "cannot confirm" yet the expected answer is retrievable (and vice versa).
 5. Timeout cases are **counted as failures** (similarity 0), never silently skipped — the denominator is always the full 50.
 
-All metrics are aggregated over the full 50-case set. Per-case details are persisted to `docs/evaluation-results.json`.
+All metrics are aggregated over the full 50-case set. Per-case details are persisted to `results/evaluation-results.json`.
 
 ---
 
@@ -133,10 +133,10 @@ The one failing case (肺炎球菌肺炎) was an API timeout, which is counted a
 # 2. Set embedding cache env vars (if running offline):
 #    HF_HOME=C:\ai\huggingface, HF_HUB_OFFLINE=1
 # 3. Run the evaluation (no rebuild — loads existing medical_db):
-python docs/rerun_eval.py
+python scripts/rerun_eval.py
 ```
 
-The script runs the 50-case test set (loaded from `docs/test_questions.json`) and writes per-case details to `docs/evaluation-results.json`. Aggregate metrics print to stdout.
+The script runs the 50-case test set (loaded from `data/test_questions.json`) and writes per-case details to `results/evaluation-results.json`. Aggregate metrics print to stdout.
 
 ---
 

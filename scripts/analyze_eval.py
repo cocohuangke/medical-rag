@@ -4,7 +4,7 @@
 import json, sys, os
 sys.stdout.reconfigure(encoding='utf-8')
 
-p = os.path.join(os.path.dirname(__file__), 'evaluation-results.json')
+p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'results', 'evaluation-results.json')
 with open(p, 'r', encoding='utf-8') as f:
     data = json.load(f)
 

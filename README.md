@@ -103,16 +103,24 @@ medical-rag/
 ├── medical_rag_system.py        # Core pipeline + evaluation
 ├── app.py                       # Streamlit demo
 ├── docs/
+│   ├── evaluation-report.md     # Full evaluation methodology + results
+│   ├── medical-rag-en.md        # English translation of project doc
+│   ├── poster-text-revisions.md # Poster claim corrections
+│   ├── UPGRADE_PLAN.md          # 3-phase development plan
+│   ├── medical_rag.docx         # Original project document (Chinese)
+│   └── poster.pdf               # Academic poster (1 page)
+├── scripts/
+│   ├── rerun_eval.py            # Run the 50-case evaluation
+│   ├── analyze_eval.py          # Analyse evaluation-results.json
+│   └── classify_failures.py     # Classify failing cases
+├── data/
 │   ├── medical.json             # 100-record subset (dev)
 │   ├── medical - 全部.json      # 8,808-record full corpus
-│   ├── test_questions.json      # 50-case test set (externalised)
-│   ├── medical-rag-en.md        # English translation of project doc
-│   ├── medical_rag.docx         # Original project document (Chinese)
-│   ├── evaluation-report.md     # Full evaluation methodology + results
-│   ├── poster-text-revisions.md # Poster claim corrections
-│   └── UPGRADE_PLAN.md          # 3-phase development plan
+│   └── test_questions.json      # 50-case test set
+├── results/
+│   └── evaluation-results.json  # Per-case evaluation output
+├── logs/                        # Evaluation + rebuild logs
 ├── medical_db/                  # ChromaDB persist directory
-├── poster.pdf                   # Academic poster (1 page)
 ├── config.yaml                  # LLM + runtime config (gitignored)
 ├── config.example.yaml          # Config template
 └── README.md                    # This file
@@ -158,10 +166,10 @@ export HF_HUB_OFFLINE=1
 
 ```bash
 conda activate learn-ds
-python docs/rerun_eval.py
+python scripts/rerun_eval.py
 ```
 
-This loads the 50-case test set from `docs/test_questions.json`, runs the evaluation, and writes per-case details to `docs/evaluation-results.json`. Aggregate metrics print to stdout. (The full-corpus ChromaDB in `medical_db/` must already be built.)
+This loads the 50-case test set from `data/test_questions.json`, runs the evaluation, and writes per-case details to `results/evaluation-results.json`. Aggregate metrics print to stdout. (The full-corpus ChromaDB in `medical_db/` must already be built.)
 
 ### Launch the Streamlit demo
 

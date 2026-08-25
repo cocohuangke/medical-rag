@@ -11,8 +11,8 @@ __pycache__/
 *.bak-*/
 
 # 评测结果（运行时生成）
-docs/evaluation-results.json
-docs/rebuild-chromadb.log
+results/evaluation-results.json
+logs/rebuild-chromadb.log
 
 # 临时脚本
 speed_test.py

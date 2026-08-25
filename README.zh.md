@@ -103,16 +103,24 @@ medical-rag/
 ├── medical_rag_system.py        # 核心流水线 + 评测
 ├── app.py                       # Streamlit 演示
 ├── docs/
+│   ├── evaluation-report.md     # 完整评测方法 + 结果
+│   ├── medical-rag-en.md        # 项目文档英文版
+│   ├── poster-text-revisions.md # 海报表述修正
+│   ├── UPGRADE_PLAN.md          # 三阶段开发计划
+│   ├── medical_rag.docx         # 原始项目文档（中文）
+│   └── poster.pdf               # 学术海报（1 页）
+├── scripts/
+│   ├── rerun_eval.py            # 运行 50 例评测
+│   ├── analyze_eval.py          # 分析 evaluation-results.json
+│   └── classify_failures.py     # 失败用例分类
+├── data/
 │   ├── medical.json             # 100 条子集（开发用）
 │   ├── medical - 全部.json      # 8,808 条全量语料
-│   ├── test_questions.json      # 50 例测试集（外置）
-│   ├── medical-rag-en.md        # 项目文档英文版
-│   ├── medical_rag.docx         # 原始项目文档（中文）
-│   ├── evaluation-report.md     # 完整评测方法 + 结果
-│   ├── poster-text-revisions.md # 海报表述修正
-│   └── UPGRADE_PLAN.md          # 三阶段开发计划
+│   └── test_questions.json      # 50 例测试集
+├── results/
+│   └── evaluation-results.json  # 逐例评测输出
+├── logs/                        # 评测 + 重建日志
 ├── medical_db/                  # ChromaDB 持久化目录
-├── poster.pdf                   # 学术海报（1 页）
 ├── config.yaml                  # LLM + 运行时配置（gitignore）
 ├── config.example.yaml          # 配置模板
 └── README.md                    # 本文件（英文）/ README.zh.md（中文）
@@ -158,10 +166,10 @@ export HF_HUB_OFFLINE=1
 
 ```bash
 conda activate learn-ds
-python docs/rerun_eval.py
+python scripts/rerun_eval.py
 ```
 
-该命令从 `docs/test_questions.json` 加载 50 例测试集，运行评测，并将每例详情写入 `docs/evaluation-results.json`。聚合指标打印到 stdout。（需先构建好 `medical_db/` 中的全量语料 ChromaDB。）
+该命令从 `data/test_questions.json` 加载 50 例测试集，运行评测，并将每例详情写入 `results/evaluation-results.json`。聚合指标打印到 stdout。（需先构建好 `medical_db/` 中的全量语料 ChromaDB。）
 
 ### 启动 Streamlit 演示
 
@@ -178,7 +186,7 @@ streamlit run app.py
 
 ### 测试集
 
-50 例，全部为症状类问题，覆盖 20 种呼吸系统疾病，每种疾病 2–3 种问法。固定测试集保证不同流水线版本之间的公平对比。测试集已外置到 [`docs/test_questions.json`](docs/test_questions.json)。
+50 例，全部为症状类问题，覆盖 20 种呼吸系统疾病，每种疾病 2–3 种问法。固定测试集保证不同流水线版本之间的公平对比。测试集已外置到 [`data/test_questions.json`](data/test_questions.json)。
 
 ### 指标
 

@@ -3,7 +3,7 @@
 """只跑评测，不重建库。medical_db 已存在则直接加载。"""
 import sys, os, json
 sys.stdout.reconfigure(encoding='utf-8')
-# 把项目根目录加入 sys.path（medical_rag_system.py 在根目录，本脚本在 docs/）
+# 把项目根目录加入 sys.path（medical_rag_system.py 在根目录，本脚本在 scripts/）
 _PROJ_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if _PROJ_ROOT not in sys.path:
     sys.path.insert(0, _PROJ_ROOT)
@@ -38,7 +38,7 @@ TEST_QUESTIONS = mrs.load_test_questions()
 print(f"\n=== 开始 {len(TEST_QUESTIONS)} case 评测 ===")
 eval_result = mrs.evaluate_rag_system(TEST_QUESTIONS)
 
-out = os.path.join('docs', 'evaluation-results.json')
+out = os.path.join('results', 'evaluation-results.json')
 with open(out, 'w', encoding='utf-8') as f:
     json.dump(eval_result, f, ensure_ascii=False, indent=2)
 

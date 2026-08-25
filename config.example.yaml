@@ -38,7 +38,7 @@ embedding:
 
 # 数据
 data:
-  path: docs/medical - 全部.json
+  path: data/medical - 全部.json
   persist_dir: medical_db
 
 # 文本分割
