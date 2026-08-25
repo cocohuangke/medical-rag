@@ -16,9 +16,6 @@
   - rank_bm25, jieba  (BM25 hybrid retrieval)
   - ollama (本地 LLM 服务)
 
-注意：
-  langchain-community 已被官方标记为 sunset，但目前仍可用。
-  生产环境建议迁移到 langchain-ollama / langchain-chroma 等独立集成包。
 """
 
 import json
