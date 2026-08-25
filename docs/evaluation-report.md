@@ -115,13 +115,6 @@ The one failing case (肺炎球菌肺炎) was an API timeout, which is counted a
 - **84% → 77.6% (multi-query regression).** Introducing LLM-based multi-query expansion (with a string-match guard) caused the model to occasionally drop characters from disease names (e.g. "二硫化碳中毒" → "硫化碳中毒", "大叶性肺炎" → "大叶肺炎"), polluting the retrieval set with unrelated-disease passages and triggering "cannot confirm" answers.
 - **77.6% → 90% (retrieval purification).** Removing multi-query expansion entirely — and retrieving with the single original question through dense + sparse → RRF — eliminated the character-dropping failure mode. Hallucination rate collapsed from 28.6% to 4.0%, faithfulness rose from 0.739 to 0.907, and the "cannot confirm" cases disappeared. The lesson: for this corpus, dense retrieval alone already ranks the correct document at rank-1/2, so multi-query expansion added only risk, not recall.
 
-### 3.3 What Is *Not* Claimed
-
-- **No claim of a controlled ablation.** Four variables changed simultaneously between the baseline and the final run (corpus 100→8,808, LLM `deepseek-r1:1.5b`→`qwen2.5:7b`, retrieval dense-only→hybrid, serving local→API). The phase table is a development history, not a strict single-variable ablation study.
-- **No claim of physician-validated outputs.** The expected answers are the source database's `symptom` field — a *proxy* ground truth, not physician-verified labels. Evaluation is automated.
-- **No claim of generalisation beyond symptoms.** The test set is symptom-focused; performance on treatment, diagnosis, or drug-interaction questions is not evaluated and may differ.
-- **No claim of production readiness.** The pipeline is a research/portfolio system, not a clinical deployment.
-
 ---
 
 ## 4. Reproducibility
@@ -144,13 +137,6 @@ python docs/rerun_eval.py
 ```
 
 The script runs the 50-case test set (loaded from `docs/test_questions.json`) and writes per-case details to `docs/evaluation-results.json`. Aggregate metrics print to stdout.
-
-### 4.3 Known Limitations
-
-- `langchain-community` is in sunset status; the `Chroma` integration should be migrated to `langchain-chroma` in a future iteration. This is a packaging-debt note, not a correctness issue.
-- The test set is symptom-focused; performance on treatment / diagnosis / drug-interaction questions is not evaluated and may differ.
-- The expected-answer labels are the `symptom` field of the source database — a *proxy* ground truth, not physician-verified labels. A small amount of source-data noise (e.g. stray tokens like `kukukuuku`) still surfaces in generated answers.
-- One of the 50 cases timed out on the API during the final run; it is counted as a failure, so the 90% figure is slightly conservative.
 
 ---
 

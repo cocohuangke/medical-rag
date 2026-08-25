@@ -33,11 +33,11 @@
 ### 1.3 加 Citation Prompt
 - **改 `MEDICAL_QA_TEMPLATE`**：要求模型在回答末尾标注 `[来源: 疾病名称]` 和引用原文片段
 - **改 `ask_medical_question`**：解析 citation，结构化返回 `answer` + `citations`
-- **提示词**："Citation Prompt → Answer + Evidence" 真正落地
+- **提示词**："Citation Prompt → Answer + Evidence" 落地
 
 ---
 
-## Phase 2：评测强化（Day 2，~4 小时）
+## Phase 2：评测强化
 
 ### 2.1 多维评估指标
 在现有 `evaluate_rag_system` 基础上扩展：
@@ -49,11 +49,11 @@
 ### 2.2 重跑评测 + 生成报告
 - 跑完整 40 个测试用例
 - 输出 markdown 报告：`docs/evaluation-report.md`
-- **实现多维评估框架**："Multidimensional evaluation framework" 真正落地
+- **实现多维评估框架**："Multidimensional evaluation framework" 落地
 
 ---
 
-## Phase 3：Demo + 文档（Day 3，~4 小时）
+## Phase 3：Demo + 文档
 
 ### 3.1 Streamlit Demo
 - **新建 `app.py`**：聊天界面，输入问题 → 显示答案 + 引用来源 + 检索到的文档
