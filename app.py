@@ -22,6 +22,11 @@ import os
 # 让 streamlit 能找到同目录下的 medical_rag_system 模块
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
+# 强制从本地 HF 缓存加载嵌入模型，禁止联网拉取（与 scripts/rerun_eval.py 一致）
+os.environ.setdefault("HF_HOME", r"C:\ai\huggingface")
+os.environ.setdefault("HF_HUB_OFFLINE", "1")
+os.environ.setdefault("TRANSFORMERS_OFFLINE", "1")
+
 import streamlit as st
 
 # 延迟导入，避免初始化阶段报错影响 UI 渲染
@@ -51,7 +56,10 @@ def main():
         try:
             _, Config = load_rag()
             st.write(f"**嵌入模型:** `{Config.EMBED_MODEL}`")
-            st.write(f"**生成模型:** `{Config.LLM_MODEL}`")
+            _llm_name = (Config.LLM_OLLAMA["model"]
+                         if Config.LLM_PROVIDER == "ollama"
+                         else Config.LLM_OPENAI_COMPAT["model"])
+            st.write(f"**生成模型:** `{_llm_name}`")
             st.write(f"**检索策略:** Dense (BGE) + Sparse (BM25) → RRF")
             st.write(f"**融合 Top-K:** {Config.FUSED_K}")
             st.write(f"**相似度阈值:** {Config.SIMILARITY_THRESHOLD}")
