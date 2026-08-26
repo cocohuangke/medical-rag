@@ -180,6 +180,8 @@ streamlit run app.py
 
 The demo provides a web UI for interactive medical QA — enter a question, get an answer with cited sources and the retrieved context passages.
 
+![Medical RAG Streamlit demo](docs/screen-shot.jpg)
+
 ---
 
 ## Evaluation

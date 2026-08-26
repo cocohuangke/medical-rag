@@ -180,6 +180,8 @@ streamlit run app.py
 
 演示提供一个交互式医疗问答 Web UI——输入问题，得到带引用来源和召回上下文片段的答案。
 
+![医疗 RAG Streamlit 演示](docs/screen-shot.jpg)
+
 ---
 
 ## 评测
